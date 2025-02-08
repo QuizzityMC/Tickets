@@ -1,6 +1,7 @@
 import { getServerSession } from "next-auth/next"
 import { redirect } from "next/navigation"
-import { PrismaClient } from "@prisma/client"
+import fs from "fs/promises"
+import path from "path"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import {
   BarChart,
@@ -16,11 +17,10 @@ import {
 } from "recharts"
 import { Button } from "@/components/ui/button"
 
-const prisma = new PrismaClient()
-
 async function getTicketData() {
-  const tickets = await prisma.ticket.findMany()
-  return tickets
+  const ticketsFilePath = path.join(process.cwd(), "data", "tickets.json")
+  const ticketsData = await fs.readFile(ticketsFilePath, "utf8")
+  return JSON.parse(ticketsData)
 }
 
 export default async function AdminDashboard() {
