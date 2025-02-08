@@ -1,9 +1,8 @@
 import NextAuth from "next-auth"
 import CredentialsProvider from "next-auth/providers/credentials"
-import { PrismaClient } from "@prisma/client"
-import { compare } from "bcrypt"
-
-const prisma = new PrismaClient()
+import fs from "fs/promises"
+import path from "path"
+import bcrypt from "bcrypt"
 
 const handler = NextAuth({
   providers: [
@@ -18,17 +17,17 @@ const handler = NextAuth({
           return null
         }
 
-        const user = await prisma.user.findUnique({
-          where: {
-            email: credentials.email,
-          },
-        })
+        const usersFilePath = path.join(process.cwd(), "data", "users.json")
+        const usersData = await fs.readFile(usersFilePath, "utf8")
+        const users = JSON.parse(usersData)
+
+        const user = users.find((u: any) => u.email === credentials.email)
 
         if (!user) {
           return null
         }
 
-        const isPasswordValid = await compare(credentials.password, user.password)
+        const isPasswordValid = await bcrypt.compare(credentials.password, user.password)
 
         if (!isPasswordValid) {
           return null
@@ -61,4 +60,5 @@ const handler = NextAuth({
 })
 
 export { handler as GET, handler as POST }
+
 
