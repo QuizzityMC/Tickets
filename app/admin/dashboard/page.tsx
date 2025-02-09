@@ -2,6 +2,7 @@ import { getServerSession } from "next-auth/next"
 import { redirect } from "next/navigation"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
+import DashboardCharts from '@/components/DashboardCharts'; // Added import statement
 
 async function getTicketData() {
   const response = await fetch("http://localhost:9028/api/book-ticket", { cache: "no-store" })
@@ -69,16 +70,16 @@ export default async function AdminDashboard() {
               <CardTitle>Most Popular Ticket</CardTitle>
             </CardHeader>
             <CardContent>
-  <p className="text-4xl font-bold">
-    {ticketTypeCount && Object.entries(ticketTypeCount).length > 0 
-      ? Object.entries(ticketTypeCount).reduce((a, b) => (a[1] > b[1] ? a : b))[0]
-      : 'No ticket types available'}
-  </p>
-</CardContent>
+              <p className="text-4xl font-bold">
+                {ticketTypeCount && Object.entries(ticketTypeCount).length > 0 
+                  ? Object.entries(ticketTypeCount).reduce((a, b) => (a[1] > b[1] ? a : b))[0]
+                  : 'No ticket types available'}
+              </p>
+            </CardContent>
           </Card>
         </div>
 
-        <DashboardCharts chartData={chartData} dailySalesData={dailySalesData} />
+        <DashboardCharts chartData={chartData} dailySalesData={dailySalesData} /> {/* DashboardCharts component */}
 
         <Card>
           <CardHeader>
@@ -126,4 +127,3 @@ export default async function AdminDashboard() {
     </div>
   )
 }
-
