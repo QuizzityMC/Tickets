@@ -2,7 +2,6 @@ import { getServerSession } from "next-auth/next"
 import { redirect } from "next/navigation"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
-import DashboardCharts from '../../components/DashboardCharts'; // Correct relative path
 
 async function getTicketData() {
   const response = await fetch("http://localhost:9028/api/book-ticket", { cache: "no-store" })
@@ -79,7 +78,7 @@ export default async function AdminDashboard() {
           </Card>
         </div>
 
-        <DashboardCharts chartData={chartData} dailySalesData={dailySalesData} /> {/* DashboardCharts component */}
+        <DashboardCharts chartData={chartData} dailySalesData={dailySalesData} />
 
         <Card>
           <CardHeader>
