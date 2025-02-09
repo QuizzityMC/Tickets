@@ -6,14 +6,17 @@ import { useRouter } from "next/navigation"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
+import { toast } from "@/components/ui/use-toast"
 
 export default function AdminLogin() {
   const [email, setEmail] = useState("")
   const [password, setPassword] = useState("")
+  const [isLoading, setIsLoading] = useState(false)
   const router = useRouter()
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
+    setIsLoading(true)
     const result = await signIn("credentials", {
       redirect: false,
       email,
@@ -23,7 +26,12 @@ export default function AdminLogin() {
     if (result?.ok) {
       router.push("/admin/dashboard")
     } else {
-      console.error("Login failed")
+      toast({
+        title: "Error",
+        description: "Invalid credentials",
+        variant: "destructive",
+      })
+      setIsLoading(false)
     }
   }
 
@@ -46,8 +54,8 @@ export default function AdminLogin() {
               required
             />
           </div>
-          <Button type="submit" className="w-full">
-            Sign In
+          <Button type="submit" className="w-full" disabled={isLoading}>
+            {isLoading ? "Signing In..." : "Sign In"}
           </Button>
         </form>
       </div>
