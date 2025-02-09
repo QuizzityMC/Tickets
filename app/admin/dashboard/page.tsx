@@ -69,10 +69,12 @@ export default async function AdminDashboard() {
               <CardTitle>Most Popular Ticket</CardTitle>
             </CardHeader>
             <CardContent>
-              <p className="text-4xl font-bold">
-                {Object.entries(ticketTypeCount).reduce((a, b) => (a[1] > b[1] ? a : b))[0]}
-              </p>
-            </CardContent>
+  <p className="text-4xl font-bold">
+    {ticketTypeCount && Object.entries(ticketTypeCount).length > 0 
+      ? Object.entries(ticketTypeCount).reduce((a, b) => (a[1] > b[1] ? a : b))[0]
+      : 'No ticket types available'}
+  </p>
+</CardContent>
           </Card>
         </div>
 
