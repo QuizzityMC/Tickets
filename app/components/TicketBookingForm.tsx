@@ -27,8 +27,17 @@ export default function TicketBookingForm() {
     e.preventDefault()
     if (isLoading) return
     setIsLoading(true)
+
     const selectedTicket = ticketTypes.find((ticket) => ticket.id === ticketType)
-    if (!selectedTicket) return
+    if (!selectedTicket) {
+      toast({
+        title: "Error",
+        description: "Please select a ticket type",
+        variant: "destructive",
+      })
+      setIsLoading(false)
+      return
+    }
 
     const ticketData = {
       name,
@@ -46,19 +55,18 @@ export default function TicketBookingForm() {
         body: JSON.stringify(ticketData),
       })
 
+      const data = await response.json()
+
       if (response.ok) {
-        const data = await response.json()
         router.push(
           `/ticket?name=${encodeURIComponent(name)}&type=${encodeURIComponent(selectedTicket.name)}&qrCode=${encodeURIComponent(data.ticket.qrCode)}`,
         )
       } else {
-        const errorData = await response.json()
         toast({
           title: "Error",
-          description: errorData.message || "Failed to book ticket",
+          description: data.message || "Failed to book ticket",
           variant: "destructive",
         })
-        setIsLoading(false)
       }
     } catch (error) {
       console.error("Error booking ticket:", error)
@@ -67,6 +75,7 @@ export default function TicketBookingForm() {
         description: "An unexpected error occurred",
         variant: "destructive",
       })
+    } finally {
       setIsLoading(false)
     }
   }
@@ -97,7 +106,7 @@ export default function TicketBookingForm() {
       </div>
       <div>
         <Label htmlFor="ticketType">Ticket Type</Label>
-        <Select onValueChange={setTicketType} disabled={isLoading}>
+        <Select onValueChange={setTicketType} disabled={isLoading} required>
           <SelectTrigger>
             <SelectValue placeholder="Select ticket type" />
           </SelectTrigger>
