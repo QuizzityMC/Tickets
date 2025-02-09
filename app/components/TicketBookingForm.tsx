@@ -20,10 +20,13 @@ export default function TicketBookingForm() {
   const [name, setName] = useState("")
   const [email, setEmail] = useState("")
   const [ticketType, setTicketType] = useState("")
+  const [isLoading, setIsLoading] = useState(false)
   const router = useRouter()
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
+    if (isLoading) return
+    setIsLoading(true)
     const selectedTicket = ticketTypes.find((ticket) => ticket.id === ticketType)
     if (!selectedTicket) return
 
@@ -55,6 +58,7 @@ export default function TicketBookingForm() {
           description: errorData.message || "Failed to book ticket",
           variant: "destructive",
         })
+        setIsLoading(false)
       }
     } catch (error) {
       console.error("Error booking ticket:", error)
@@ -63,6 +67,7 @@ export default function TicketBookingForm() {
         description: "An unexpected error occurred",
         variant: "destructive",
       })
+      setIsLoading(false)
     }
   }
 
@@ -70,15 +75,29 @@ export default function TicketBookingForm() {
     <form onSubmit={handleSubmit} className="space-y-6 bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
       <div>
         <Label htmlFor="name">Full Name</Label>
-        <Input id="name" type="text" value={name} onChange={(e) => setName(e.target.value)} required />
+        <Input
+          id="name"
+          type="text"
+          value={name}
+          onChange={(e) => setName(e.target.value)}
+          required
+          disabled={isLoading}
+        />
       </div>
       <div>
         <Label htmlFor="email">Email</Label>
-        <Input id="email" type="email" value={email} onChange={(e) => setEmail(e.target.value)} required />
+        <Input
+          id="email"
+          type="email"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+          required
+          disabled={isLoading}
+        />
       </div>
       <div>
         <Label htmlFor="ticketType">Ticket Type</Label>
-        <Select onValueChange={setTicketType} required>
+        <Select onValueChange={setTicketType} disabled={isLoading}>
           <SelectTrigger>
             <SelectValue placeholder="Select ticket type" />
           </SelectTrigger>
@@ -91,8 +110,8 @@ export default function TicketBookingForm() {
           </SelectContent>
         </Select>
       </div>
-      <Button type="submit" className="w-full">
-        Book Ticket
+      <Button type="submit" className="w-full" disabled={isLoading}>
+        {isLoading ? "Booking..." : "Book Ticket"}
       </Button>
     </form>
   )
