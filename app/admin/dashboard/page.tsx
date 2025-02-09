@@ -2,7 +2,7 @@ import { getServerSession } from "next-auth/next"
 import { redirect } from "next/navigation"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
-import DashboardCharts from '@/components/DashboardCharts'; // Added import statement
+import DashboardCharts from '@/app/components/DashboardCharts'; // Updated import path
 
 async function getTicketData() {
   const response = await fetch("http://localhost:9028/api/book-ticket", { cache: "no-store" })
