@@ -57,7 +57,7 @@ export async function POST(request: Request) {
     // Send confirmation email
     try {
       await transporter.sendMail({
-        from: '"ADS Films" <noreply@adsfilms.com>',
+        from: '"ADS Films" <noreply@adsfims.com>',
         to: ticketData.email,
         subject: "Your Ticket for The Body in the Night",
         html: `
