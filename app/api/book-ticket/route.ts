@@ -7,7 +7,7 @@ const tickets: any[] = []
 
 // Configure email transporter
 const transporter = nodemailer.createTransport({
-  host: "smtp.gmail.com",
+  host: "smtp.zoho.eu",
   port: 587,
   secure: false,
   auth: {
