@@ -31,7 +31,7 @@ export default function Ticket({ name, type, qrCode }: TicketProps) {
         </div>
         <div className="md:flex-shrink-0">
           <Image
-            src="https://media.discordapp.net/attachments/1207191526220890152/1336935709961093140/adsfilmslogo.png?ex=67a840e8&is=67a6ef68&hm=c8998036121e42c5da6bd1cdc041556f49fa40ff83ffbee355876b1d7ccc83dc&=&format=webp&quality=lossless"
+            src="https://avatars.githubusercontent.com/u/197720306?s=400&u=9a293903952ddfb6a267037ec58690c7090348eb&v=4"
             alt="ADS Films Logo"
             width={200}
             height={200}
