@@ -18,7 +18,7 @@ const handler = NextAuth({
 
         // Hardcoded admin credentials
         const adminEmail = "quizzitymc@canarychat.me"
-        const adminPasswordHash = "$2b$10$YourHashedPasswordHere" // Replace with actual bcrypt hash of "ADSFilms"
+        const adminPasswordHash = "$2a$12$y5o9apsgt0ctFcMnyA4EaejOz9XD/guHgoGQfoD2i.m/DpCCEGMem" // Replace with actual bcrypt hash of "ADSFilms"
 
         if (credentials.email !== adminEmail) {
           console.log("User not found")
