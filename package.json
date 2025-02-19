@@ -1,5 +1,5 @@
 {
-  "name": "my-v0-project",
+  "name": "tickets-ads",
   "version": "0.1.0",
   "private": true,
   "scripts": {
@@ -65,7 +65,10 @@
     "next-auth": "latest",
     "@prisma/client": "latest",
     "bcrypt": "latest",
-    "qrcode": "latest"
+    "qrcode": "latest",
+    "@types/nodemailer": "latest",
+    "@types/qrcode": "latest",
+    "@types/bcrypt": "latest"
   },
   "devDependencies": {
     "@types/node": "^22",
@@ -76,3 +79,4 @@
     "typescript": "^5"
   }
 }
+
