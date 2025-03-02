@@ -1,4 +1,5 @@
 import TicketBookingForm from "./components/TicketBookingForm"
+import { Analytics } from "@vercel/analytics/react"
 import type { Metadata } from "next"
 
 export const metadata: Metadata = {
