@@ -73,43 +73,7 @@ export default function TicketBookingForm() {
 
   return (
     <form onSubmit={handleSubmit} className="space-y-6 bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
-      <div>
-        <Label htmlFor="name">Full Name</Label>
-        <Input
-          id="name"
-          type="text"
-          value={name}
-          onChange={(e) => setName(e.target.value)}
-          required
-          disabled={isLoading}
-        />
-      </div>
-      <div>
-        <Label htmlFor="email">Email</Label>
-        <Input
-          id="email"
-          type="email"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-          required
-          disabled={isLoading}
-        />
-      </div>
-      <div>
-        <Label htmlFor="ticketType">Ticket Type</Label>
-        <Select onValueChange={setTicketType} disabled={isLoading}>
-          <SelectTrigger>
-            <SelectValue placeholder="Select ticket type" />
-          </SelectTrigger>
-          <SelectContent>
-            {ticketTypes.map((ticket) => (
-              <SelectItem key={ticket.id} value={ticket.id}>
-                {ticket.name} (${ticket.price.toFixed(2)})
-              </SelectItem>
-            ))}
-          </SelectContent>
-        </Select>
-      </div>
+<t> THIS FORM HAS BEEN TAKEN DOWN. UNLESS YOU HAVE AN IN-PERSON OR PERSONAL EMAIL INVITE, DO NOT TURN UP. THESE TICKETS ARE NOT REAL TICKETS!</t>
       <Button type="submit" className="w-full" disabled={isLoading}>
         {isLoading ? "Booking..." : "Book Ticket"}
       </Button>
