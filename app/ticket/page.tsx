@@ -19,7 +19,7 @@ export default function TicketPage({
         <Ticket name={name} type={type} />
         <div className="mt-8 text-center">
           <p className="text-gray-600">Please print this ticket or save it on your mobile device.</p>
-          <p className="text-gray-600">Payment will be collected at the venue.</p>
+          <p className="text-gray-600">Make sure you got an in-person invite or other official invite, this entire ticket site amounts to nothing and if you turn up it will be very uncomfortable for all involved.</p>
         </div>
       </div>
     </div>
